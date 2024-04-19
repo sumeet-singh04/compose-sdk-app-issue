@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { QueryService } from '@sisense/sdk-ui-angular';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'compose-sdk-app';
+
+  constructor(private queryService: QueryService) {
+  }
+
+  ngOnInit(): void {
+    this.queryService.executeQueryByWidgetId({
+      widgetOid: '',
+      dashboardOid: '',
+      filters:[]
+    })
+  }
 }
