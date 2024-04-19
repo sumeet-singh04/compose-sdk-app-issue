@@ -1,27 +1,27 @@
-# ComposeSdkApp
+# Sample project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Created sample project to reproduce issue with react typing.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Setup
 
-## Code scaffolding
+* Clone project from github
+* run `npm install`
+* run `npm run build`
+* Error described below is thrown
+* If `skipLibCheck` is set to true in tsconfig.json, error is not thrown as Typescript compiler skips checking all d.ts files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Error
 
-## Build
+```
+✘ [ERROR] TS2344: Type '{ ref: (ref: HTMLDivElement | null) => void; onClick: (event: MouseEvent<Element, MouseEvent>) => void; onContextMenu: (event: MouseEvent<Element, MouseEvent>) => void; ... 5 more ...; rowSpan: number | undefined; }' does not satisfy the constraint 'HTMLAttributes<HTMLDivElement> | SVGAttributes<HTMLDivElement>'.
+  Type '{ ref: (ref: HTMLDivElement | null) => void; onClick: (event: MouseEvent<Element, MouseEvent>) => void; onContextMenu: (event: MouseEvent<Element, MouseEvent>) => void; ... 5 more ...; rowSpan: number | undefined; }' is not assignable to type 'SVGAttributes<HTMLDivElement>'.
+    Types of property 'style' are incompatible.
+      Type 'boolean | CSSProperties | undefined' is not assignable to type 'CSSProperties | undefined'.
+        Type 'false' has no properties in common with type 'Properties<string | number, string & {}>'. [plugin angular-compiler]
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    node_modules/@sisense/sdk-pivot-client/dist/components/Pivot/PivotCell.d.ts:185:31:
+      185 │     render(): React.DOMElement<{
+          ╵                                ^
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
